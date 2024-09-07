@@ -50,7 +50,7 @@ class TestMain(TestCase):
         self.assertEqual(len(result), 5)
 
     def test_filter_step3(self, data):
-        filtered_data = filter(data, "red white")
+        filtered_data = filter(data["images"], "red white")
         result = extract_names(filtered_data)
         self.assertEqual(
             result,
@@ -65,19 +65,19 @@ class TestMain(TestCase):
         self.assertEqual(len(result), 5)
 
     def test_filter_step4_portrait(self, data):
-        filtered_data = filter(data, "is:portrait")
+        filtered_data = filter(data["images"], "is:portrait")
         result = extract_names(filtered_data)
         self.assertEqual(result[0], "norway-7.jpg")
         self.assertEqual(len(result), 5)
 
     def test_filter_step4_portrait_colour(self, data):
-        filtered_data = filter(data, "is:portrait green white")
+        filtered_data = filter(data["images"], "is:portrait green white")
         result = extract_names(filtered_data)
         self.assertEqual(result, ["norway-9.jpg"])
         self.assertEqual(len(result), 1)
 
     def test_filter_step4_landscape(self, data):
-        filtered_data = filter(data, "is:landscape")
+        filtered_data = filter(data["images"], "is:landscape")
         result = extract_names(filtered_data)
         self.assertEqual(
             result,
@@ -104,7 +104,7 @@ class TestMain(TestCase):
         self.assertEqual(len(result), 17)
 
     def test_filter_step4_landscape_colour(self, data):
-        filtered_data = filter(data, "is:landscape yellow")
+        filtered_data = filter(data["images"], "is:landscape yellow")
         result = extract_names(filtered_data)
         self.assertEqual(
             result,
@@ -119,7 +119,7 @@ class TestMain(TestCase):
 
     def test_filter_step5(self, data):
         filtered_data = filter(
-            data, "is:landscape yellow OR black OR is:portrait green white"
+            data["images"], "is:landscape yellow OR black OR is:portrait green white"
         )
         result = extract_names(filtered_data)
         self.assertEqual(
@@ -279,7 +279,7 @@ def run_tests():
 
     TestMain().test_extract_names_step1(sample_data)
     TestMain().test_filter_step2(sample_data)
-    # TestMain().test_filter_step3(sample_data)
+    TestMain().test_filter_step3(sample_data)
     # TestMain().test_filter_step4_portrait(sample_data)
     # TestMain().test_filter_step4_portrait_colour(sample_data)
     # TestMain().test_filter_step4_landscape(sample_data)
