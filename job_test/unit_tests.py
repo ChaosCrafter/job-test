@@ -4,7 +4,7 @@ from .main import filter, extract_names
 
 class TestMain(TestCase):
     def test_extract_names_step1(self, data):
-        result = extract_names(data)
+        result = extract_names(data["images"])
         self.assertEqual(
             result,
             [
@@ -35,7 +35,7 @@ class TestMain(TestCase):
         self.assertEqual(len(result), 22)
 
     def test_filter_step2(self, data):
-        filtered_data = filter(data, "yellow")
+        filtered_data = filter(data["images"], "yellow")
         result = extract_names(filtered_data)
         self.assertEqual(
             result,
@@ -278,7 +278,7 @@ def run_tests():
     }
 
     TestMain().test_extract_names_step1(sample_data)
-    # TestMain().test_filter_step2(sample_data)
+    TestMain().test_filter_step2(sample_data)
     # TestMain().test_filter_step3(sample_data)
     # TestMain().test_filter_step4_portrait(sample_data)
     # TestMain().test_filter_step4_portrait_colour(sample_data)
