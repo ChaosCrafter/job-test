@@ -62,13 +62,20 @@ class TestMain(TestCase):
                 "norway-22.jpg",
             ],
         )
-        self.assertEqual(len(result), 5)
 
     def test_filter_step4_portrait(self, data):
         filtered_data = filter(data["images"], "is:portrait")
         result = extract_names(filtered_data)
-        self.assertEqual(result[0], "norway-7.jpg")
-        self.assertEqual(len(result), 5)
+        self.assertEqual(
+            result,
+            [
+                "norway-7.jpg",
+                "norway-8.jpg",
+                "norway-9.jpg",
+                "norway-12.jpg",
+                "norway-18.jpg",
+            ],
+        )
 
     def test_filter_step4_portrait_colour(self, data):
         filtered_data = filter(data["images"], "is:portrait green white")
@@ -280,9 +287,9 @@ def run_tests():
     TestMain().test_extract_names_step1(sample_data)
     TestMain().test_filter_step2(sample_data)
     TestMain().test_filter_step3(sample_data)
-    # TestMain().test_filter_step4_portrait(sample_data)
-    # TestMain().test_filter_step4_portrait_colour(sample_data)
-    # TestMain().test_filter_step4_landscape(sample_data)
-    # TestMain().test_filter_step4_landscape_colour(sample_data)
+    TestMain().test_filter_step4_portrait(sample_data)
+    TestMain().test_filter_step4_portrait_colour(sample_data)
+    TestMain().test_filter_step4_landscape(sample_data)
+    TestMain().test_filter_step4_landscape_colour(sample_data)
     # TestMain().test_filter_step5(sample_data)
     print("Test completed")

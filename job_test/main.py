@@ -19,10 +19,20 @@ def filter(src_data, filter_string):
     images = []
     for image in src_data:
         valid = True
-        for colour in filter_items:
-            if not colour in image["tags"]:
-                valid = False
-                break
+        for condition in filter_items:
+            match condition:
+                case "is:landscape":
+                    if image["width"] <= image["height"]:
+                        valid = False
+                        break
+                case "is:portrait":
+                    if image["width"] >= image["height"]:
+                        valid = False
+                        break
+                case _:
+                    if not condition in image["tags"]:
+                        valid = False
+                        break
         if valid:
             images.append(image)
     return images
@@ -33,4 +43,4 @@ def extract_names(src_data):
 
 
 def main():
-    print(live("red white"))
+    print(live("is:portrait"))
